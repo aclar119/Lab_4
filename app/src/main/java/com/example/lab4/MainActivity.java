@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         listItem = new ArrayList<>();
 
         // call the viewData() method to display the existing products
-        viewData();
+        dbhandler.viewData();  // check this line
 
         // when a product in the list is clicked, a toast is displayed with the name of the product
         productList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

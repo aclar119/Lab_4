@@ -1,6 +1,7 @@
 package com.example.lab4;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -38,5 +39,27 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCTS);
         onCreate(db);
+    }
+
+    // find a product from database
+    public Product findProduct(String productName) {
+        // fill out method
+    }
+
+    // delete from database
+    public boolean deleteProduct(String productName) {
+        // fill out method
+    }
+
+    // read all data from table
+    public Cursor viewData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_PRODUCTS;
+
+        // passing the query
+        Cursor cursor = db.rawQuery(query, null);
+
+        // returns all products from table
+        return cursor;
     }
 }
