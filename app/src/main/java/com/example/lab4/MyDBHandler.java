@@ -2,7 +2,6 @@ package com.example.lab4;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -107,7 +106,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         // this deletes the first occurrence of the product with the specified name
         if (cursor.moveToFirst()) {
             String idStr = cursor.getString(0);
-            db.delete((TABLE_PRODUCTS, COLUMN_ID + " = " + idStr, null));
+            db.delete(TABLE_PRODUCTS, COLUMN_ID + " = " + idStr, null);
             cursor.close();
             result = true;
         }
@@ -122,10 +121,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_PRODUCTS;
 
-        // passing the query
-        Cursor cursor = db.rawQuery(query, null);
-
         // returns all products from table
-        return cursor;
+        return db.rawQuery(query, null);
     }
 }
