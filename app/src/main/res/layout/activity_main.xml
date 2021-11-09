@@ -88,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
+                android:onClick="newProduct"
                 android:text="Add" />
 
             <Button
@@ -96,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
+                android:onClick="lookupProduct"
                 android:text="Find" />
 
             <Button
@@ -104,6 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
+                android:onClick="removeProduct"
                 android:text="Delete" />
         </LinearLayout>
 

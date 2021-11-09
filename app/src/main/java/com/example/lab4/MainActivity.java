@@ -2,6 +2,7 @@ package com.example.lab4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         listItem = new ArrayList<>();
 
         // call the viewData() method to display the existing products
-        dbhandler.viewData();  // check this line
+        viewData();
 
         // when a product in the list is clicked, a toast is displayed with the name of the product
         productList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -48,5 +49,92 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "" + text, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    // we use onClick for the Add button in our layout to call this method
+    public void newProduct (View view) {
+        MyDBHandler dbHandler = new MyDBHandler(this);
+
+        // get price from the text box
+        double price = Double.parseDouble(priceBox.getText().toString());
+
+        // get product name from the text box
+        // use the constructor from Product.java
+        Product product = new Product(productBox.getText().toString(), price);
+
+        // add to database with the addProduct() method from MyDBHandler.java
+        dbHandler.addProduct(product);
+
+        // clear the text boxes
+        productBox.setText("");
+        priceBox.setText("");
+
+        // clearing the list of products
+        // calling viewData() method to display the updates list of products
+        // this means what is displayed in the ListView is always current
+        listItem.clear();
+        viewData();
+    }
+
+    // we use onClick for the Find button in our layout to call this method
+    public void lookupProduct (View view) {
+        MyDBHandler dbHandler = new MyDBHandler(this);
+
+        // get product in the database using findProduct() method from MyDBHandler.java
+        Product product = dbHandler.findProduct(productBox.getText().toString());
+
+        // if found, then display the product details
+        // if not, display "No Match Found"
+        if (product != null) {
+            idView.setText(String.valueOf((product.getId())));
+            priceBox.setText(String.valueOf(product.getPrice()));
+        } else {
+            idView.setText("No Match Found");
+        }
+    }
+
+    // we use onClick for the Delete button in our layout to call this method
+    public void removeProduct (View view) {
+        MyDBHandler dbHandler = new MyDBHandler(this);
+
+        // delete product in the database using deleteProduct() method from MyDBHandler.java
+        boolean result = dbHandler.deleteProduct(productBox.getText().toString());
+
+        // clearing the list of products
+        // calling viewData() method to display tje updated list of products
+        // this means what is displayed in the ListView is always current
+        listItem.clear();
+        viewData();
+
+        // "Record Delted" or "No Match Found"
+        if (result) {
+            idView.setText("Record Deleted");
+            productBox.setText("");
+            priceBox.setText("");
+        } else {
+            idView.setText("No Match Found");
+        }
+    }
+
+    private void viewData() {
+        MyDBHandler dbHandler = new MyDBHandler(this);
+
+        // call the viewData() method in MyDBHandler that runs the query
+        Cursor cursor = dbHandler.viewData();
+
+        // if there are no products in the table, a toast says there is no data to show
+        // otherwise, while there are products, keep moving to the next product
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No data to show", Toast.LENGTH_SHORT).show();
+        } else {
+            while(cursor.moveToNext()) {
+                listItem.add(cursor.getString(1));
+            }
+            // create an array adapter that provides a view for each item
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+
+            // attaching the adapter to the ListView
+            productList.setAdapter(adapter);
+        }
     }
 }
