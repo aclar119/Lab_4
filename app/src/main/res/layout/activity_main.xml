@@ -79,14 +79,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/button_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="0dp"
                 android:layout_weight="1"
                 android:onClick="newProduct"
                 android:text="Add" />
@@ -95,7 +94,7 @@
                 android:id="@+id/button_find"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="0dp"
                 android:layout_weight="1"
                 android:onClick="lookupProduct"
                 android:text="Find" />
@@ -104,10 +103,20 @@
                 android:id="@+id/button_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="0dp"
                 android:layout_weight="1"
                 android:onClick="removeProduct"
                 android:text="Delete" />
+
+            <Button
+                android:id="@+id/button_viewall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:onClick="viewProducts"
+                android:text="View All" />
+
         </LinearLayout>
 
         <ScrollView

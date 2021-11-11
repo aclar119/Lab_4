@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class MyDBHandler extends SQLiteOpenHelper {
 
     // defining the schema
@@ -123,5 +125,30 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         // returns all products from table
         return db.rawQuery(query, null);
+    }
+
+    // read all from table
+    public ArrayList<Product> readProducts() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // passing the query
+        Cursor cursorProducts = db.rawQuery("SELECT * FROM " + TABLE_PRODUCTS, null);
+
+        // create an arraylist for our products
+        ArrayList<Product> productArrayList = new ArrayList<>();
+
+        // while there are products in our table, keep moving to the next product
+        // we add the product id, name, and price for each new element in the arraylist
+        // column 0 is product id, column 1 is product name, column 2 is product price in our table
+        if (cursorProducts.moveToFirst()) {
+            do {
+                productArrayList.add(new Product(cursorProducts.getInt(0),
+                        cursorProducts.getString(1),
+                        cursorProducts.getDouble(2)));
+            }
+            while (cursorProducts.moveToNext());
+        }
+        cursorProducts.close();
+        return productArrayList;
     }
 }
