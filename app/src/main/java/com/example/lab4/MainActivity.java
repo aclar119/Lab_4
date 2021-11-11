@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -124,28 +125,11 @@ public class MainActivity extends AppCompatActivity {
     // we use onClick for the View All button in our layout to call this method
     public void viewProducts(View view) {
         // move from one activity page to the activity_display_product page
-        setContentView(R.layout.activity_display_product);
 
-        // initializing variables
-        ArrayList<Product> productArrayList = new ArrayList<>();
-        MyDBHandler dbHandler = new MyDBHandler(this);
-
-        // getting the arraylist of products from MyDBHandler class
-        productArrayList = dbHandler.readProducts();
-
-        // here we pass the ArrayList to our adapter class
-        ProductAdapter productAdapter = new ProductAdapter(productArrayList, this);
-
-        // our recycler view is idProductDisplay in the activity_display_product.xml file
-        RecyclerView productsRV = findViewById(R.id.idProductDisplay);
-
-        // layout manager positions items within our recyclerview
-        // using a vertical recyclerview (other option is horizontal)
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        productsRV.setLayoutManager(linearLayoutManager);
-
-        // attaching the adapter to the recyclerview
-        productsRV.setAdapter(productAdapter);
+        // Changed from original lab to open on new page instead
+        // so that the back button works
+        Intent intent = new Intent(this, DisplayProductActivity.class);
+        startActivity(intent);
     }
 
     private void viewData() {
