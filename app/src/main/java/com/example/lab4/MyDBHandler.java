@@ -8,6 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+/** A class which allows for simple communication with the SQLite database.
+ * @author Andrew Clarke
+ * @author Geordan Coutts
+ * @version 1.0 (11/25/2020)
+ * @since version 1.0
+ */
 public class MyDBHandler extends SQLiteOpenHelper {
 
     // defining the schema
@@ -18,12 +24,18 @@ public class MyDBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_PRODUCTNAME = "productname";
     private static final String COLUMN_PRICE = "price";
 
-    // constructor
+    /**
+     * Creates a MyDBHandler object, which extends SQLiteOpenHelper
+     * @param context context
+     */
     public MyDBHandler (Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    // create the table
+    /**
+     * Creates the table for the products. Includes the product ID, name, and price.
+     * @param db A database in which the table will be created.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Create table TABLE_PRODUCTS (COLUMN_ID integer primary key, COLUMN_PRODUCTNAME TEXT,
@@ -36,15 +48,23 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_PRODUCTS_TABLE);
     }
 
-    // deletes old tables and creates a new one
-    // change tables by incrementing the database version number
+    /**
+     * Deletes the old tables and creates a new one. The tables may be changed by incrementing the
+     * database version number.
+     * @param db The database to be upgraded.
+     * @param oldVersion The old database's version number.
+     * @param newVersion The new database's version number.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCTS);
         onCreate(db);
     }
 
-    // insert into database
+    /**
+     * Inserts a product into the database.
+     * @param product The Product instance to be inserted.
+     */
     public void addProduct(Product product) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -59,6 +79,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Searches the database for a product with a particular name. If a product with a matching name
+     * is found, it is returned. If no product is found, a null Product object is returned.
+     * @param productName The name that is being searched.
+     * @return the product if found or null if not found
+     */
     // find a product from database
     public Product findProduct(String productName) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -90,7 +116,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return product;
     }
 
-    // delete from database
+    /**
+     * Searches for and deletes a product from the database.
+     * @param productName The name of the product to be deleted.
+     * @return A boolean. True if the value was successfully deleted and false if not.
+     */
     public boolean deleteProduct(String productName) {
         boolean result = false;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -118,7 +148,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return result;
     }
 
-    // read all data from table
+    /**
+     * Presents all the data from the database.
+     * @return Cursor containing all products from the table
+     */
     public Cursor viewData() {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_PRODUCTS;
@@ -127,6 +160,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return db.rawQuery(query, null);
     }
 
+    /**
+     * Reads all products from the table.
+     * @return An ArrayList of products
+     */
     // read all from table
     public ArrayList<Product> readProducts() {
         SQLiteDatabase db = this.getReadableDatabase();

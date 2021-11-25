@@ -18,6 +18,12 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
+/** A class which compiles all the functionality of the app. It acts as the central activity for all
+ * user interaction.
+ * @author Geordan Coutts
+ * @version 1.0 (11/25/2020)
+ * @since version 1.0
+ */
 public class MainActivity extends AppCompatActivity {
 
     TextView idView;
@@ -29,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> listItem;
     ArrayAdapter adapter;
 
+    /**
+     * Displays the exisiting products.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +67,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // we use onClick for the Add button in our layout to call this method
+    /**
+     * Gets the price and product name from the text boxes, and constructs an instance of the
+     * Product class. The Product then gets added to the database and the text boxes are cleared.
+     * Finally, the list of products is updated.
+     * @param view Allows for use of onClick attribute in xml
+     */
     public void newProduct (View view) {
+        // we use onClick for the Add button in our layout to call this method
         MyDBHandler dbHandler = new MyDBHandler(this);
 
         // get price from the text box
@@ -82,8 +98,13 @@ public class MainActivity extends AppCompatActivity {
         viewData();
     }
 
-    // we use onClick for the Find button in our layout to call this method
+    /**
+     * Searches for the product in the database. If the product is found, the product's details are
+     * displayed. Otherwise, text reading, "No Match Found" is displayed on screen.
+     * @param view Allows for use of onClick attribute in xml
+     */
     public void lookupProduct (View view) {
+        // we use onClick for the Find button in our layout to call this method
         MyDBHandler dbHandler = new MyDBHandler(this);
 
         // get product in the database using findProduct() method from MyDBHandler.java
@@ -99,8 +120,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // we use onClick for the Delete button in our layout to call this method
+    /**
+     * Finds and deletes a product from the database. The product list view is then updated.
+     * @param view Allows for use of onClick attribute in xml
+     */
     public void removeProduct (View view) {
+        // we use onClick for the Delete button in our layout to call this method
         MyDBHandler dbHandler = new MyDBHandler(this);
 
         // delete product in the database using deleteProduct() method from MyDBHandler.java
@@ -112,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         listItem.clear();
         viewData();
 
-        // "Record Delted" or "No Match Found"
+        // "Record Deleted" or "No Match Found"
         if (result) {
             idView.setText("Record Deleted");
             productBox.setText("");
@@ -122,8 +147,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // we use onClick for the View All button in our layout to call this method
+    /**
+     * Displays the complete list of all products and their data.
+     * @param view Allows for use of onClick attribute in xml
+     */
     public void viewProducts(View view) {
+        // we use onClick for the View All button in our layout to call this method
         // move from one activity page to the activity_display_product page
 
         // Changed from original lab to open on new page instead
@@ -132,6 +161,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Iterates through all the products in the database and displays them.
+     */
     private void viewData() {
         MyDBHandler dbHandler = new MyDBHandler(this);
 

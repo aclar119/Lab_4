@@ -1,5 +1,11 @@
 package com.example.lab4;
 
+/**
+ * @author Andrew Clarke
+ * @author Geordan Coutts
+ * @version 1.0 (11/25/2020)
+ * @since version 1.0
+ */
 public class Product {
     private int id;
     private String productName;

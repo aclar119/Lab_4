@@ -8,6 +8,12 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
+/** A class which
+ * @author Andrew Clarke
+ * @author Geordan Coutts
+ * @version 1.0 (11/25/2020)
+ * @since version 1.0
+ */
 public class DisplayProductActivity extends AppCompatActivity {
 
     @Override

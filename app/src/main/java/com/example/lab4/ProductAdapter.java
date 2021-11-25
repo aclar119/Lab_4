@@ -11,11 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-// adapter is used to get data from the table and then populate the recyclerview
-// think of it as the middle man that connects the table with the layout view
+/** A class which
+ * @author Andrew Clarke
+ * @author Geordan Coutts
+ * @version 1.0 (11/25/2020)
+ * @since version 1.0
+ */
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+    // adapter is used to get data from the table and then populate the recyclerview
+    // think of it as the middle man that connects the table with the layout view
 
-    // creating variables
     private ArrayList<Product> productArrayList;
     private Context context;
 
