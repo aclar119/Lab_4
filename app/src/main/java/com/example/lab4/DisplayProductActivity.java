@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-/** A class which
+/** A class which is used to display the products to the user.
  * @author Andrew Clarke
  * @author Geordan Coutts
  * @version 1.0 (11/25/2020)
@@ -16,6 +16,10 @@ import java.util.ArrayList;
  */
 public class DisplayProductActivity extends AppCompatActivity {
 
+    /**
+     * Displays the products in a list format.
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
