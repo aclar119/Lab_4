@@ -77,26 +77,53 @@ public class MainActivity extends AppCompatActivity {
         // we use onClick for the Add button in our layout to call this method
         MyDBHandler dbHandler = new MyDBHandler(this);
 
-        // get price from the text box
-        double price = Double.parseDouble(priceBox.getText().toString());
-
         // get product name from the text box
-        // use the constructor from Product.java
-        Product product = new Product(productBox.getText().toString(), price);
+        String strName = productBox.getText().toString();
+        // get price from the text box
+        String strPrice = priceBox.getText().toString();
 
-        // add to database with the addProduct() method from MyDBHandler.java
-        dbHandler.addProduct(product);
+        // Validate name and price before proceeding
+        if (validateName(strName) && validatePrice(strPrice)) {
 
-        // clear the text boxes
-        productBox.setText("");
-        priceBox.setText("");
+            double price = Double.parseDouble(strPrice);
 
-        // clearing the list of products
-        // calling viewData() method to display the updates list of products
-        // this means what is displayed in the ListView is always current
-        listItem.clear();
-        viewData();
+            // use the constructor from Product.java
+            Product product = new Product(strName, price);
+
+            // add to database with the addProduct() method from MyDBHandler.java
+            dbHandler.addProduct(product);
+
+            // clear the text boxes
+            productBox.setText("");
+            priceBox.setText("");
+
+            // clearing the list of products
+            // calling viewData() method to display the updates list of products
+            // this means what is displayed in the ListView is always current
+            listItem.clear();
+            viewData();
+        }
     }
+
+    /**
+     * Verifies whether the given String is a valid product name
+     * @param Name The product name to be validated
+     * @return Boolean describing whether the param Name is valid product name
+     */
+    public static boolean validateName(String Name) {
+        return Name.matches("[a-zA-Z0-9\\s]+");
+
+    }
+
+    /**
+     * Verifies whether the given String is a valid product price
+     * @param Price The product price to be validated
+     * @return Boolean describing whether the param Price is valid product price
+     */
+    public static boolean validatePrice(String Price) {
+        return Price.matches("\\d+.?\\d{0,2}");
+    }
+
 
     /**
      * Searches for the product in the database. If the product is found, the product's details are

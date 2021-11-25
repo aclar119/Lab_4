@@ -22,10 +22,10 @@ public class Product {
     }
 
     /**
-     * Creates a product and assigns it an id, productName, and price.
-     * @param id the id of the product, use for identification within the database
-     * @param productName the name of the product
-     * @param price the price of the product
+     * Create a new product object and set its attributes
+     * @param id int representing the database id (primary key) for this product
+     * @param productName String representing the name of the product
+     * @param price double representing the price of the product
      */
     public Product(int id, String productName, double price) {
         this.id = id;
@@ -34,9 +34,9 @@ public class Product {
     }
 
     /**
-     * Creates a product without assigning it an id.
-     * @param productName the name of the product
-     * @param price the price of the product
+     * Create a new product object and set its name and price attributes
+     * @param productName String representing the name of the product
+     * @param price double representing the price of the product
      */
     public Product (String productName, double price) {
         this.productName = productName;

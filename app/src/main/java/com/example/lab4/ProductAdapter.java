@@ -26,24 +26,23 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     private Context context;
 
     /**
-     * The constructor for the ProductAdapter class.
-     * @param productModalArrayList an ArrayList of all the products to be listed.
-     * @param context the context
+     * Create a new product adapter object
+     * @param productModalArrayList ArrayList containing the product objects to be displayed
+     * @param context Context within which the object exists
      */
     public ProductAdapter(ArrayList<Product> productModalArrayList, Context context) {
         this.productArrayList = productModalArrayList;
         this.context = context;
     }
 
-    /**
-     * Called when the RecyclerView needs to represent an item. This method inflates the layout file
-     * for the recycler view items. Layout inflater is used to create a new product for the layout.
-     * @param parent the parent ViewGroup
-     * @param viewType the type of view
-     * @return ViewHolder
-     */
     @NonNull
     @Override
+    /**
+     * Is called every time the recylcerview needs to represent a new item.
+     * @param parent ViewGroup holding the RecyclerView that we will be adding items to
+     * @param viewType The view type of the new View.
+     * @return A new ViewHolder that holds a View of the given view type.
+     */
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // inflating our layout file for our recycler view items
         // layout inflater is used to create a new product for our layout
@@ -51,14 +50,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         return new ViewHolder(view);
     }
 
-    /**
-     * Called by RecyclerView to display the data at the specified position. It updates the contents
-     * of the recycler view item to reflect the specific product.
-     * @param holder the ViewHolder
-     * @param position the position in the ArrayList from which the Product should be extracted.
-     */
     @Override
-    public  void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    /**
+     * called by RecyclerView to display the data at the specified position
+     * it updates the contents of the recycler view item to reflect the specific product
+     * @param ViewHolder The ViewHolder which should be updated to represent the product at the given position in the ArrayList.
+     * @param position int: The position of the product that we are displaying within the ArrayList
+     */
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = productArrayList.get(position);
 
         // we get the product name using our getter from Product.java
@@ -89,6 +88,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         // creating variables for the TextViews
         private TextView productName, productPrice, productId;
 
+        /**
+         * Create a new ViewHolder object
+         * @param itemView View referencing the XML object used to display each product
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             // initialize the TextViews
