@@ -43,6 +43,14 @@ public class Product {
         this.price = price;
     }
 
+    /**
+     * Returns a string describing the product by listing all its information.
+     * @returns String A string of all the Product's data.
+     */
+    public String productInfo() {
+        return ("Product ID: " + this.id + "Product Name: " + this.productName + "; Price: $" + this.price);
+    }
+
 
     // setters and getters
     public void setID(int id) { this.id = id; }

@@ -112,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public static boolean validateName(String Name) {
         return Name.matches("[a-zA-Z0-9\\s]+");
-
     }
 
     /**
